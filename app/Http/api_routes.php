@@ -18,5 +18,8 @@ $api->version('v1', function ($api) {
 	$api->get('free', function() {
 		return \App\User::all();
 	});
-
+		$api->group(['middleware' => 'api.auth'], function ($api) {
+		$api->post('driver/store', 'App\Api\V1\Controllers\DriverController@store');
+		$api->post('driver', 'App\Api\V1\Controllers\DriverController@index');
+	});
 });
